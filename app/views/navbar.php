@@ -180,62 +180,7 @@
   </div>
 </div>
 
-<div class="modal fade" tabindex="-1" role="dialog" id="keypadModal"><!-- TECLADO NUMERICO -->
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
 
-      <div class="modal-header">
-        <h5 class="modal-title"><?php echo str_lbl_keypad; ?></h5>
-      </div>
-
-      <div class="modal-body">
-
-        <input type="number" class="btn btn-outline-primary btn-block" value="" id="selectedQtty" />
-
-        <br>
-
-        <div class="row">
-          <div class="col-4"><input type="button" class="btn btn-info btn-block" value="7" id="numpad7" /></div>
-          <div class="col-4"><input type="button" class="btn btn-info btn-block" value="8" id="numpad8" /></div>
-          <div class="col-4"><input type="button" class="btn btn-info btn-block" value="9" id="numpad9" /></div>
-        </div>
-
-        <br>
-        
-        <div class="row">
-          <div class="col-4"><input type="button" class="btn btn-info btn-block" value="4" id="numpad4" /></div>
-          <div class="col-4"><input type="button" class="btn btn-info btn-block" value="5" id="numpad5" /></div>
-          <div class="col-4"><input type="button" class="btn btn-info btn-block" value="6" id="numpad6" /></div>
-        </div>
-        
-        <br>
-        
-        <div class="row">
-          <div class="col-4"><input type="button" class="btn btn-info btn-block" value="1" id="numpad1" /></div>
-          <div class="col-4"><input type="button" class="btn btn-info btn-block" value="2" id="numpad2" /></div>
-          <div class="col-4"><input type="button" class="btn btn-info btn-block" value="3" id="numpad3" /></div>
-        </div>
-        
-        <br>
-        
-        <div class="row">
-          <div class="col-4"><input type="button" class="btn btn-info btn-block" value="0" id="numpad0" /></div>
-          <div class="col-4"></div>
-          <div class="col-4"><input type="button" class="btn btn-secondary btn-block" value="CE" id="numpadClear" /></ion-icon></div>
-        </div>
-
-        <br>
-
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="clearForms('productForm');"><?php echo str_btn_cancel; ?></button>
-        <button type="button" class="btn btn-primary" id="numpadSave"><?php echo str_btn_save; ?></button>
-      </div>
-      
-    </div>
-  </div>
-</div>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="phoneModal"><!-- TELEFONO -->
   <div class="modal-dialog" role="document">
