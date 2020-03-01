@@ -1,5 +1,5 @@
 <?php
-  include('./lang/es-ar.php');
+  include('./lang/español.php');
   include('./src/pisa_v0.php');
 ?>
 
@@ -23,8 +23,19 @@
     </head>
     <body id="fullScreen" class="pisa-body">
 
-        <?php include "views/navbar.php"; ?>
-        <?php include "views/footer.php"; ?>
+        <?php 
+        
+        if ( file_exists ( 'pisa_config.json' ) )
+        {
+            include "views/navbar.php";
+            include "views/footer.php";
+        }
+        else
+        {
+            include "install/index.php";
+        }
+        
+        ?>
 
     </body>
     <script src="js/pisa_v0.js"></script>
