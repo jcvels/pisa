@@ -11,15 +11,15 @@
                 var DB_NAME = document.getElementById("DB_NAME").value;
                 var DB_PASS = document.getElementById("DB_PASS").value;
                 var APP_CUST = document.getElementById("APP_CUST").value;
-                var APP_LOGO = document.getElementById("APP_LOGO").value;
+                var APP_LOGO = "./img/logo-delivery.jpg";
 
                 if ( DB_HOST == '' || DB_USER == '' || DB_NAME == '' || DB_PASS == '' || APP_CUST == '' || APP_LOGO == '' )
                 {
-                    alert('Debe completar todos los valores del formulario');
+                    alert('Faltan datos necesarios');
                 }
                 else
                 {
-                    var createJsonHttp = './install/crearJson.php?DB_HOST=' + DB_HOST + '&DB_USER=' + DB_USER + '&DB_NAME=' + DB_NAME + '&DB_PASS=' + DB_PASS + '&APP_CUST=' + APP_CUST + '&APP_LOGO=' + APP_LOGO;
+                    var createJsonHttp = './config/config-json.php?DB_HOST=' + DB_HOST + '&DB_USER=' + DB_USER + '&DB_NAME=' + DB_NAME + '&DB_PASS=' + DB_PASS + '&APP_CUST=' + APP_CUST + '&APP_LOGO=' + APP_LOGO;
                     
                     var xmlhttp = new XMLHttpRequest();
                     xmlhttp.open("GET", createJsonHttp , false);
@@ -34,6 +34,24 @@
                 
             }
 
+            function uploadFile() 
+            {
+
+                var formData = new FormData();
+                var fileField = document.getElementById("image-file");
+                var logoViewer = document.getElementById("logo-viewer");
+
+                formData.append('uploadedfile', fileField.files[0]);
+
+                fetch( '/config/config-upload.php', { method: 'POST', body: formData } )
+                    .then(response => response.json())
+                    .catch(error => console.error('Error:', error))
+                    .then(response => console.log('Success:', response))
+                    .then( logoViewer.src = "./img/logo-delivery.jpg" )
+                    .then( alert("Archivo subido exitosamente") );
+            
+            }
+
         </script>
     </head>
 
@@ -44,7 +62,7 @@
             <div class="jumbotron">
 
                 <div class="float-right">
-                    <img src="img/icono-torre-pisa.png" height=120px class="rounded" alt="Logo Su-Pizza">
+                    <img src="img/icono-torre-pisa.png" height="120px"  class="rounded" alt="Logo Su-Pizza">
                 </div>
                 <h1 class="display-4">Pisa</h1>
                 <p class="lead">Haciendo simple la gestión de tu delivery</p>
@@ -69,7 +87,7 @@
                 </li>
             </ul>
 
-            <div class="tab-content" id="myTabContent">
+            <div class="tab-content" >
 
                 <div class="tab-pane fade show active" id="tabBaseDatos" role="tabpanel" aria-labelledby="tabBaseDatos">
                         <form >
@@ -92,11 +110,16 @@
                 <div class="tab-pane fade show" id="tabPersonalizaApp" role="tabpanel" aria-labelledby="tabPersonalizaApp">
                     <form>
                         <br>
+                        <div class="float-right">
+                            <img src="img/icono-torre-pisa.png" height="150px" alt="logo" id="logo-viewer">
+                        </div>
                         <label for="APP_CUST">Nombre de tu delivery</label>
                         <input type="text" class="form-control col-sm-3" id="APP_CUST" name="APP_CUST">
                         <br>
-                        <label for="APP_LOGO">Logo</label>
-                        <input type="text" class="form-control col-sm-3" id="APP_LOGO" name="APP_LOGO">
+                        <label for="APP_LOGO">Logo</label><br>
+                        <input  type="file" id="image-file" />
+                        <br><br>
+                        <button type="button" class="btn btn-primary" onclick="uploadFile();" >Subir Logo</button>
                     </form>
                     <hr class="my-4">
                 </div>

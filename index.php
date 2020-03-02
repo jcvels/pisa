@@ -29,14 +29,14 @@
         {
             include "views/navbar.php";
             include "views/footer.php";
+            echo '</body><script src="js/pisa_v0.js"></script>';
         }
         else
         {
             include "config/index.php";
+            echo '</body>';
         }
         
         ?>
 
-    </body>
-    <script src="js/pisa_v0.js"></script>
 </html>
