@@ -13,23 +13,21 @@
                 var APP_CUST = document.getElementById("APP_CUST").value;
                 var APP_LOGO = "./img/logo-delivery.jpg";
 
-                if ( DB_HOST == '' || DB_USER == '' || DB_NAME == '' || DB_PASS == '' || APP_CUST == '' || APP_LOGO == '' )
+                if ( DB_HOST == '' || DB_NAME == '' || DB_USER == '' || DB_PASS == '' || APP_CUST == '' || APP_LOGO == '' )
                 {
                     alert('Faltan datos necesarios');
                 }
                 else
                 {
-                    var createJsonHttp = './config/config-json.php?DB_HOST=' + DB_HOST + '&DB_USER=' + DB_USER + '&DB_NAME=' + DB_NAME + '&DB_PASS=' + DB_PASS + '&APP_CUST=' + APP_CUST + '&APP_LOGO=' + APP_LOGO;
-                    
+                    var createJsonHttp = './config/config-json.php?DB_HOST=' + DB_HOST + '&DB_NAME=' + DB_NAME + '&DB_USER=' + DB_USER + '&DB_PASS=' + DB_PASS + '&APP_CUST=' + APP_CUST + '&APP_LOGO=' + APP_LOGO;
                     var xmlhttp = new XMLHttpRequest();
                     xmlhttp.open("GET", createJsonHttp , false);
                     xmlhttp.send();
                     if ( xmlhttp.status == 200 )
                     {
-                        if ( xmlhttp.responseText == 'DONE' ) { alert('Datos cargados exitosamente'); }
-                        else { alert('No fue posible cargar los datos del nuevo cliente'); }
+                        if ( xmlhttp.responseText == 'DONE' ) { add2output('Archivo de configuración generado correctamente.'); }
+                        else { add2output('No fue posible generar el archivo de configuración.'); }
                     }
-
                 }
                 
             }
@@ -48,8 +46,49 @@
                     .catch(error => console.error('Error:', error))
                     .then(response => console.log('Success:', response))
                     .then( logoViewer.src = "./img/logo-delivery.jpg" )
-                    .then( alert("Archivo subido exitosamente") );
-            
+                    .then( add2output("Logo cargado exitosamente") );
+
+            }
+
+            function createDataBase()
+            {
+                fetch( '/config/config-database.php', { method: 'POST' } )
+                    .then(response => response.json())
+                    .catch(error => console.error('Error:', error))
+                    .then(response => console.log('Success:', response))
+                    .then(response => add2output("Base de datos instalada.") );           
+            }
+
+            function install()
+            {
+                var installBtn = document.getElementById("installBtn");
+                installBtn.disabled = true;
+
+                setTimeout( function() 
+                { 
+                    createJson(); 
+                    setTimeout( function() 
+                    { 
+                        createDataBase();
+                        setTimeout( function()
+                        { 
+                            add2output("Instalación finalizada. Reiniciando la aplicación...");
+                            setTimeout( function()
+                            { 
+                                location.reload(); 
+                            }, 3000);
+                        }, 3000);
+                    }, 3000);
+                }, 3000);
+
+            }
+
+            function add2output( mensaje )
+            {
+
+                var OMensaje = document.getElementById("output-label");
+                OMensaje.innerHTML += mensaje + '<br>';
+
             }
 
         </script>
@@ -95,7 +134,7 @@
                             <label for="DB_HOST">Servidor de base de datos</label>
                             <input type="text" class="form-control col-sm-3" id="DB_HOST" name="DB_HOST">
                             <br>
-                            <label for="DB_NAME">Nombre de la base de datos</label>
+                            <label for="DB_HOST">Nombre de base de datos</label>
                             <input type="text" class="form-control col-sm-3" id="DB_NAME" name="DB_NAME">
                             <br>
                             <label for="DB_USER">Usuario</label>
@@ -127,8 +166,12 @@
                 <div class="tab-pane fade show" id="tabFinalizar" role="tabpanel" aria-labelledby="tabFinalizar">
                     <form>
                         <br>
-                        <button type="button" class="btn btn-primary" onclick="createJson();" >Guardar Configuración</button>
+                        <button type="button" class="btn btn-primary" id="installBtn" onclick="install();" >Instalar</button>
                     </form>
+
+                    <br>
+                    <p class="text-monospace" id="output-label"></p>
+
                     <hr class="my-4">
                 </div>
 

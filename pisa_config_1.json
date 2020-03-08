@@ -1,0 +1,8 @@
+{
+    "DB_HOST":"localhost",
+    "DB_USER":"root",
+    "DB_NAME":"dbtest1755",
+    "DB_PASS":"",
+    "APP_CUST":"PisaDelivery",
+    "APP_LOGO":".\/img\/logo-delivery.jpg"
+}
