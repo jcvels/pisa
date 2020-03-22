@@ -3,15 +3,24 @@
   define( 'DEBUG', true ); if( DEBUG ) { ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL); }
 
   /* Credenciales de conexión a la DB */
-  define( 'DB_HOST', 'localhost' );
-  define( 'DB_USER', 'pisav0user' );
-  define( 'DB_NAME', 'pisav0supizza' );
-  define( 'DB_PASS', 'kwXVnAS6eP43K2MJydtlvjcX');
+  define( 'DB_HOST', getDataFromJson('DB_HOST') );
+  define( 'DB_USER', getDataFromJson('DB_USER') );
+  define( 'DB_NAME', getDataFromJson('DB_NAME') );
+  define( 'DB_PASS', getDataFromJson('DB_PASS') );
 
   function dbQuery( $query ) { /* Conexión y consulta con la base de datos */
     $dblink = new mysqli( DB_HOST, DB_USER, DB_PASS, DB_NAME ); /* Create database connection */
     if ($dblink->connect_errno) { return 'Error al conectar con la base de datos.'; } /* Check connection was successful */
     else { return $dblink->query( $query ); } /* Ejecuta QUERY */
+  }
+  function getDataFromJson( $option )
+  {
+    if ( file_exists('pisa_config.json') )
+    {
+      $json = file_get_contents('pisa_config.json');
+      $obj = json_decode($json);
+      return $obj->{ $option };
+    } 
   }
   function getdatalist($option) { /* Genera JSON con listado de Ordenes, Productos, Combos o Clientes */
     if (empty($option)) { return 'Debe especificar una opción.'; }

@@ -24,7 +24,7 @@ document.getElementById("btnAbout").addEventListener("click", function(){ cargar
 document.getElementById("btnExit").addEventListener("click", function(){ cargar("login"); } ); /* <-- Determinar si usa página o función */
 document.getElementById("btmOrdes").addEventListener("click", function(){ cargar("orders"); } );
 document.getElementById("btnNeworder").addEventListener("click", function(){ cargar("neworder"); } );
-document.getElementById("numpad1").addEventListener("click", function(){ selectedQtty.value += "1"; } );
+/* document.getElementById("numpad1").addEventListener("click", function(){ selectedQtty.value += "1"; } );
 document.getElementById("numpad2").addEventListener("click", function(){ selectedQtty.value += "2"; } );
 document.getElementById("numpad3").addEventListener("click", function(){ selectedQtty.value += "3"; } );
 document.getElementById("numpad4").addEventListener("click", function(){ selectedQtty.value += "4"; } );
@@ -34,7 +34,7 @@ document.getElementById("numpad7").addEventListener("click", function(){ selecte
 document.getElementById("numpad8").addEventListener("click", function(){ selectedQtty.value += "8"; } );
 document.getElementById("numpad9").addEventListener("click", function(){ selectedQtty.value += "9"; } );
 document.getElementById("numpad0").addEventListener("click", function(){ selectedQtty.value += "0"; } );
-document.getElementById("numpadClear").addEventListener("click", function(){ selectedQtty.value = ""; } );
+document.getElementById("numpadClear").addEventListener("click", function(){ selectedQtty.value = ""; } ); */
 
 /* INICIAL ACTIONS */
 cargar("dashboard");

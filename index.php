@@ -1,5 +1,5 @@
 <?php
-  include('./lang/español.php');
+  include('./lang/argentina.php');
   include('./src/pisa_v0.php');
 ?>
 
